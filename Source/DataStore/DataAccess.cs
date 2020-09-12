@@ -13,7 +13,6 @@ namespace DataStore
 
         public DataAccess()
         {
-
             var serverOptions = new ServerOptions()
             {
                 ServerUrl = "http://127.0.0.1:45001",

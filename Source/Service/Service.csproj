@@ -8,8 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Unity" Version="5.11.7" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\DataStore\DataStore.csproj" />
+    <ProjectReference Include="..\RestApi\RestApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

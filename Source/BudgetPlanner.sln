@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStore.Interfaces", "Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{292B6E0D-5DE5-4228-9BB2-0D046D584796}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RestApi", "RestApi\RestApi.csproj", "{5900C55D-CB0E-4B91-9E22-18FB2902C991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{292B6E0D-5DE5-4228-9BB2-0D046D584796}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{292B6E0D-5DE5-4228-9BB2-0D046D584796}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{292B6E0D-5DE5-4228-9BB2-0D046D584796}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5900C55D-CB0E-4B91-9E22-18FB2902C991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5900C55D-CB0E-4B91-9E22-18FB2902C991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5900C55D-CB0E-4B91-9E22-18FB2902C991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5900C55D-CB0E-4B91-9E22-18FB2902C991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
