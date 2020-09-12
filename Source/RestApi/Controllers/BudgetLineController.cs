@@ -1,6 +1,5 @@
 ﻿using DataStore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Unity;
 
 namespace RestApi.Controllers
 {

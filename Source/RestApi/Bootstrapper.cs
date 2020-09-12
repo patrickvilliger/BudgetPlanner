@@ -18,7 +18,9 @@ namespace RestApi
                 .UseUnityServiceProvider(container)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder
+                    .UseStartup<Startup>()
+                    .UseUrls("https://localhost:45002/");
                 });
         }
     }
