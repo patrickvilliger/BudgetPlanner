@@ -5,22 +5,8 @@ using Unity.Microsoft.DependencyInjection;
 
 namespace RestApi
 {
-    public class Program
+    public class Bootstrapper
     {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder().Build().Run();
-        }
-
-        public static IHostBuilder CreateHostBuilder()
-        {
-            return Host.CreateDefaultBuilder()
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-        }
-
         public static void Run(IUnityContainer container)
         {
             CreateHostBuilder(container).Build().RunAsync();

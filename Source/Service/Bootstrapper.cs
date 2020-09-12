@@ -1,6 +1,5 @@
 ﻿using DataStore;
 using DataStore.Interfaces;
-using RestApi;
 using Unity;
 
 namespace VilligerElectronics.BudgetPlanner.Service
@@ -15,7 +14,7 @@ namespace VilligerElectronics.BudgetPlanner.Service
 
             var da = Container.Resolve<IDataAccess>();
 
-            Program.Run(Container);
+            RestApi.Bootstrapper.Run(Container);
         }
 
         public IUnityContainer Container { get; private set; }
