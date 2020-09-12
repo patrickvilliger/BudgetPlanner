@@ -1,9 +1,6 @@
 ﻿using DataStore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
 using VilligerElectronics.BudgetPlanner.Core.Budget;
 
 namespace RestApi.Controllers
@@ -20,11 +17,18 @@ namespace RestApi.Controllers
         }
 
         [HttpGet]
-        public List<OneTimeBudgetLine> Get()
+        public IActionResult Get()
         {
-            var budgetLines = _dataAccess.Query<OneTimeBudgetLine>();
+            try
+            {
+                var budgetLines = _dataAccess.Query<OneTimeBudgetLine>();
 
-            return budgetLines;
+                return Ok(budgetLines);
+            }
+            catch (Exception e)
+            {
+                return Problem(e.Message);
+            }
         }
 
         [HttpPost]
