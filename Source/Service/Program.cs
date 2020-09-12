@@ -1,13 +1,16 @@
-﻿using System;
+﻿using NLog;
+using System;
 using VilligerElectronics.BudgetPlanner.Service;
 
 namespace Service
 {
     class Program
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Log.Info("Starting Service");
 
             var bs = new Bootstrapper();
 

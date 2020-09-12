@@ -12,4 +12,10 @@
     <ProjectReference Include="..\DataStore\DataStore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="BudgetPlanner.exe.nlog">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

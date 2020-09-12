@@ -1,4 +1,5 @@
 ﻿using DataStore.Interfaces;
+using NLog;
 using Raven.Client.Documents;
 using Raven.Embedded;
 using System;
@@ -7,6 +8,7 @@ namespace DataStore
 {
     public class DataAccess : IDataAccess
     {
+        private static Logger Log = LogManager.GetCurrentClassLogger();
         private IDocumentStore _store;
 
         public DataAccess()
@@ -22,18 +24,18 @@ namespace DataStore
             {
                 EmbeddedServer.Instance.StartServer(serverOptions);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                var str = "";
+                Log.Error(e);
             }
 
             try
             {
                 _store = EmbeddedServer.Instance.GetDocumentStore("BudgetPlanner");
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                var str = "";
+                Log.Error(e);
             }
 
         }
