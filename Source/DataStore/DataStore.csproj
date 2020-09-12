@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>VilligerElectronics.BudgetPlanner.DataStore</AssemblyName>
+    <RootNamespace>VilligerElectronics.BudgetPlanner.DataStore</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RavenDB.Embedded" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataStore.Interfaces\DataStore.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
