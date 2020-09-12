@@ -3,6 +3,8 @@ using NLog;
 using Raven.Client.Documents;
 using Raven.Embedded;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStore
 {
@@ -39,6 +41,14 @@ namespace DataStore
 
         }
 
+        public List<T> Query<T>()
+        {
+            using (var session = _store.OpenSession())
+            {
+                return session.Query<T>().ToList();
+            }
+        }
+
         public T Query<T>(string id)
         {
             using (var session = _store.OpenSession())
@@ -52,6 +62,7 @@ namespace DataStore
             using (var session = _store.OpenSession())
             {
                 session.Store(document);
+                session.SaveChanges();
             }
         }
     }
