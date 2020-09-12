@@ -1,12 +1,10 @@
 ﻿using System;
-using VilligerElectronics.BudgetPlanner.Core.Budget;
 
 namespace VilligerElectronics.BudgetPlanner.Core.Transactions
 {
-    public class PlannedTransaction : BudgetLineBase
+    public class PlannedTransaction
     {
-        public PlannedTransaction(string name, decimal ammount, DateTime dueDate)
-            : base(name)
+        public PlannedTransaction(decimal ammount, DateTime dueDate)
         {
             Ammount = ammount;
             DueDate = dueDate;

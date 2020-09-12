@@ -2,9 +2,10 @@
 
 namespace VilligerElectronics.BudgetPlanner.Core.Budget
 {
-    public class OneTimeBudgetLine
+    public class OneTimeBudgetLine : BudgetLineBase
     {
-        public OneTimeBudgetLine(decimal ammount, DateTime dueDate)
+        public OneTimeBudgetLine(string name, decimal ammount, DateTime dueDate)
+            : base(name)
         {
             Ammount = ammount;
             DueDate = dueDate;
