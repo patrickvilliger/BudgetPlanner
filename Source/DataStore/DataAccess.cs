@@ -1,10 +1,12 @@
 ﻿using DataStore.Interfaces;
+using Microsoft.Extensions.Options;
 using NLog;
 using Raven.Client.Documents;
 using Raven.Embedded;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using VilligerElectronics.BudgetPlanner.DataStore;
 
 namespace DataStore
 {
@@ -13,12 +15,12 @@ namespace DataStore
         private static Logger Log = LogManager.GetCurrentClassLogger();
         private IDocumentStore _store;
 
-        public DataAccess()
+        public DataAccess(IOptions<DbSettings> settingsAccessor)
         {
             var serverOptions = new ServerOptions()
             {
-                ServerUrl = "http://127.0.0.1:45001",
-                DataDirectory = "C:/VilligerElectronics/BudgetPlanner/Database"
+                ServerUrl = settingsAccessor.Value.ServerUrl,
+                DataDirectory = settingsAccessor.Value.DataDirectory
             };
 
             try
