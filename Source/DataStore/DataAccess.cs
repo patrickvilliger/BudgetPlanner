@@ -5,6 +5,7 @@ using Raven.Embedded;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
 namespace VilligerElectronics.BudgetPlanner.DataStore
@@ -19,7 +20,8 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
             var serverOptions = new ServerOptions()
             {
                 ServerUrl = settingsAccessor.Value.ServerUrl,
-                DataDirectory = settingsAccessor.Value.DataDirectory
+                DataDirectory = settingsAccessor.Value.DataDirectory,
+                FrameworkVersion = "6.0.0"
             };
 
             try
@@ -47,6 +49,14 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
             using (var session = _store.OpenSession())
             {
                 return session.Query<T>().ToList();
+            }
+        }
+
+        public async Task<List<T>> QueryAsync<T>()
+        {
+            using (var session = _store.OpenAsyncSession())
+            {
+                return await session.Query<T>().ToListAsync();
             }
         }
 

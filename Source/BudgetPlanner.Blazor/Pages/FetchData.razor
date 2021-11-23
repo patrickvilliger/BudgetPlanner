@@ -1,9 +1,10 @@
 ﻿@page "/fetchdata"
 
-<PageTitle>Weather forecast</PageTitle>
+<PageTitle>Budget forecast</PageTitle>
 
 @using BudgetPlanner.Blazor.Data
-@inject WeatherForecastService ForecastService
+@using VilligerElectronics.BudgetPlanner.Core.Budget
+@inject BudgetService BudgetService
 
 <h1>Weather forecast</h1>
 
@@ -18,20 +19,20 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Description</th>
+                <th>Due Date</th>
+                <th>Booked Date</th>
+                <th>Tags</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.Description</td>
+                    <td>@forecast.DueDate.ToLocalTime().DateTime.ToShortDateString()</td>
+                    <td>@forecast.BookingDate.ToLocalTime().DateTime.ToShortDateString()</td>
+                    <td>@forecast.Tags</td>
                 </tr>
             }
         </tbody>
@@ -39,10 +40,10 @@ else
 }
 
 @code {
-    private WeatherForecast[]? forecasts;
+    private List<BudgetPosition>? forecasts;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        forecasts = await BudgetService.GetAllBudgetPositions();
     }
 }

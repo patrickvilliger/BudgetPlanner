@@ -1,6 +1,4 @@
 using BudgetPlanner.Blazor.Data;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using VilligerElectronics.BudgetPlanner.DataStore;
 using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
@@ -9,8 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddSingleton<BudgetService>();
 builder.Services.AddSingleton<IDataAccess, DataAccess>();
+
+builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
 
 var app = builder.Build();
 
