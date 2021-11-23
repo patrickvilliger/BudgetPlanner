@@ -1,20 +1,17 @@
 ﻿using BudgetPlanner.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace VilligerElectronics.BudgetPlanner.Core
 {
-    public interface IDataAccess
+    public interface IBalanceRepository
     {
-        Task<List<T>> QueryAsync<T>();
+        Task<List<Balance>> QueryAsync();
 
-        T Query<T>(string id);
+        void Store(Balance document);
 
-        void Store<T>(T document);
-
-        void Remove<T>(string id);
+        void Remove(string id);
 
         Task<Balance?> GetClosestBalance(DateOnly today);
     }

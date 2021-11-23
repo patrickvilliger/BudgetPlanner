@@ -1,38 +1,78 @@
 ﻿@page "/balance"
 
-<PageTitle>Add Budget</PageTitle>
+<PageTitle>Balance</PageTitle>
 
-@using BudgetPlanner.Blazor.Data
 @using System.Globalization
 @using BudgetPlanner.Domain.Entities
-@inject BudgetService BudgetService
+@using VilligerElectronics.BudgetPlanner.Core
+@inject IBalanceRepository BalanceRepo
 
 <h1>Counter</h1>
 
-<EditForm Model="@budgetPosition" OnValidSubmit="@HandleValidSubmit">
-    <InputText @bind-Value="budgetPosition.Description"/>
-    <InputDate @bind-Value="budgetPosition.DueDate"/>
-    <input type="number" value="@(budgetPosition.Ammount.ToString("G29"))" @onchange="@(e => budgetPosition.Ammount = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" />
+@if (balancePositions == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <EditForm Model="@budgetPosition" OnValidSubmit="@HandleValidSubmit">
+        <InputDate @bind-Value="budgetPosition.Date"/>
+        <input type="number" value="@(budgetPosition.CurrentBalance.ToString("G29"))" @onchange="@(e => budgetPosition.CurrentBalance = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" />
 
-    <button class="btn btn-primary" type="submit">Add</button>
-</EditForm>
+        <button class="btn btn-primary" type="submit">Add</button>
+    </EditForm>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var balance in balancePositions)
+            {
+                <tr>
+                    <td>@balance.Date</td>
+                    <td>@balance.CurrentBalance</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => RemoveBudget(balance.Id)">x</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+    private List<Domain.Entities.Balance>? balancePositions;
 
-    private BudgetPosition budgetPosition = new BudgetPosition()
+    protected override async Task OnInitializedAsync()
     {
-            DueDate = DateOnly.FromDateTime(DateTime.Now),
-            Description = "",
-            BookingDate = DateOnly.MinValue,
-            Tags = new List<string>
-            {
-                "Income",
-                "NoTax"
-            }
+        await Update();
+    }
+
+    private async Task Update()
+    {
+        balancePositions = await BalanceRepo.QueryAsync();
+    }
+
+    protected async Task RemoveBudget(string id)
+    {
+        BalanceRepo.Remove(id);
+        await Update();
+    }
+
+    private Domain.Entities.Balance budgetPosition = new Domain.Entities.Balance()
+    {
+        CurrentBalance = 0,
+        Date = DateOnly.FromDateTime(DateTime.Now)
     };
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        BudgetService.StoreBudgetPosition(budgetPosition);
+        BalanceRepo.Store(budgetPosition);
+        await Update();
     }
 }
