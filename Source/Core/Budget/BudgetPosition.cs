@@ -5,15 +5,17 @@ namespace VilligerElectronics.BudgetPlanner.Core.Budget
 {
     public record BudgetPosition
     {
-        public string Description { get; init; }
+        public string Id { get; set; }
 
-        public IEnumerable<string> Tags { get; init; }
+        public string Description { get; set; }
 
-        public DateTimeOffset DueDate { get; init; }
+        public IEnumerable<string> Tags { get; set; }
 
-        public DateTimeOffset BookingDate { get; init; }
+        public DateOnly DueDate { get; set; }
 
-        public decimal Ammount { get; init; }
+        public DateOnly BookingDate { get; set; }
+
+        public decimal Ammount { get; set; }
 
     }
 }

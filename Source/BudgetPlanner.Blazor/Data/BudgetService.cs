@@ -21,5 +21,10 @@ namespace BudgetPlanner.Blazor.Data
         {
             dataAccess.Store<BudgetPosition>(pos);
         }
+
+        public void RemoveById(string id)
+        {
+            dataAccess.Remove<BudgetPosition>(id);
+        }
     }
 }

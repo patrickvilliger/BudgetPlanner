@@ -12,5 +12,7 @@ namespace VilligerElectronics.BudgetPlanner.DataStore.Interfaces
         T Query<T>(string id);
 
         void Store<T>(T document);
+
+        void Remove<T>(string id);
     }
 }

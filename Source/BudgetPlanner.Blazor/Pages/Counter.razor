@@ -1,28 +1,38 @@
 ﻿@page "/counter"
 
-<PageTitle>Counter</PageTitle>
+<PageTitle>Add Budget</PageTitle>
 
 @using BudgetPlanner.Blazor.Data
+@using System.Globalization
 @using VilligerElectronics.BudgetPlanner.Core.Budget
 @inject BudgetService BudgetService
 
 <h1>Counter</h1>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Add new Budget Position</button>
+<EditForm Model="@budgetPosition" OnValidSubmit="@HandleValidSubmit">
+    <InputText @bind-Value="budgetPosition.Description"/>
+    <InputDate @bind-Value="budgetPosition.DueDate"/>
+    <input type="number" value="@(budgetPosition.Ammount.ToString("G29"))" @onchange="@(e => budgetPosition.Ammount = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" />
+
+    <button class="btn btn-primary" type="submit">Add</button>
+</EditForm>
 
 @code {
-    private void IncrementCount()
+
+    private BudgetPosition budgetPosition = new BudgetPosition()
     {
-        BudgetService.StoreBudgetPosition(new BudgetPosition
-        {
-            DueDate = DateTimeOffset.Now,
-            Description = "Test",
-            BookingDate = DateTimeOffset.MinValue,
+            DueDate = DateOnly.FromDateTime(DateTime.Now),
+            Description = "",
+            BookingDate = DateOnly.MinValue,
             Tags = new List<string>
             {
                 "Income",
                 "NoTax"
             }
-        });
+    };
+
+    private void HandleValidSubmit()
+    {
+        BudgetService.StoreBudgetPosition(budgetPosition);
     }
 }

@@ -6,11 +6,11 @@
 @using VilligerElectronics.BudgetPlanner.Core.Budget
 @inject BudgetService BudgetService
 
-<h1>Weather forecast</h1>
+<h1>Budget forecast</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
-@if (forecasts == null)
+@if (budgets == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -22,17 +22,22 @@ else
                 <th>Description</th>
                 <th>Due Date</th>
                 <th>Booked Date</th>
+                <th>Ammount</th>
                 <th>Tags</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var budget in budgets)
             {
                 <tr>
-                    <td>@forecast.Description</td>
-                    <td>@forecast.DueDate.ToLocalTime().DateTime.ToShortDateString()</td>
-                    <td>@forecast.BookingDate.ToLocalTime().DateTime.ToShortDateString()</td>
-                    <td>@forecast.Tags</td>
+                    <td>@budget.Description</td>
+                    <td>@budget.DueDate.ToShortDateString()</td>
+                    <td>@budget.BookingDate.ToShortDateString()</td>
+                    <td>@budget.Ammount</td>
+                    <td>@budget.Tags</td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => RemoveBudget(budget.Id)">x</button>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -40,10 +45,16 @@ else
 }
 
 @code {
-    private List<BudgetPosition>? forecasts;
+    private List<BudgetPosition>? budgets;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await BudgetService.GetAllBudgetPositions();
+        budgets = await BudgetService.GetAllBudgetPositions();
+    }
+
+    protected async Task RemoveBudget(string id)
+    {
+        BudgetService.RemoveById(id);
+        budgets = await BudgetService.GetAllBudgetPositions();
     }
 }

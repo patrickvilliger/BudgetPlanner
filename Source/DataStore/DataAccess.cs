@@ -76,5 +76,14 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
                 session.SaveChanges();
             }
         }
+
+        public void Remove<T>(string id)
+        {
+            using (var session = _store.OpenSession())
+            {
+                session.Delete(id);
+                session.SaveChanges();
+            }
+        }
     }
 }
