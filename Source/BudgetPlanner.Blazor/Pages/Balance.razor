@@ -55,7 +55,8 @@ else
 
     private async Task Update()
     {
-        balancePositions = await BalanceRepo.QueryAsync();
+        var tempBalancePositions = await BalanceRepo.QueryAsync();
+        balancePositions = tempBalancePositions.OrderBy(x => x.Date).ToList();
     }
 
     protected async Task RemoveBudget(string id)

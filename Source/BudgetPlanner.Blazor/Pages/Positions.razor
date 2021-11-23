@@ -20,7 +20,7 @@ else
     <EditForm Model="@budgetPosition" OnValidSubmit="@HandleValidSubmit">
         <InputText @bind-Value="budgetPosition.Description"/>
         <InputDate @bind-Value="budgetPosition.DueDate"/>
-        <input type="number" value="@(budgetPosition.Ammount.ToString("G29"))" @onchange="@(e => budgetPosition.Ammount = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" />
+        <input type="number" value="@(budgetPosition.Ammount.ToString("G29"))" @onchange="@(e => budgetPosition.Ammount = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" step="0.01" />
 
         <button class="btn btn-primary" type="submit">Add</button>
     </EditForm>
@@ -63,7 +63,8 @@ else
 
     private async Task Update()
     {
-        budgets = await BudgetRepo.QueryAsync();
+        var tempBudgets = await BudgetRepo.QueryAsync();
+        budgets = tempBudgets.OrderBy(x => x.DueDate).ToList();
     }
 
     protected async Task RemoveBudget(string id)
