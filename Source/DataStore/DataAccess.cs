@@ -1,4 +1,6 @@
-﻿using Raven.Client.Documents;
+﻿using BudgetPlanner.Domain.Entities;
+using Raven.Client.Documents;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +38,19 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
             using (var session = _store.OpenSession())
             {
                 return session.Query<T>();
+            }
+        }
+
+        public async Task<Balance?> GetClosestBalance(DateOnly today)
+        {
+            using (var session = _store.OpenAsyncSession())
+            {
+                var resultList = await session.Query<Balance>()
+                              .Where(b => b.Date < today)
+                              .OrderByDescending(x => x.Date)
+                              .ToListAsync();
+
+                return resultList.FirstOrDefault();
             }
         }
 

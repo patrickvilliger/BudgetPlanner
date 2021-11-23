@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace VilligerElectronics.BudgetPlanner.Core
 {
@@ -14,9 +15,9 @@ namespace VilligerElectronics.BudgetPlanner.Core
             this.dataAccess = dataAccess;
         }
 
-        public List<ForecastPosition> CreateForecast(DateOnly today)
+        public async Task<List<ForecastPosition>> CreateForecast(DateOnly today)
         {
-            var latestBalanceRecord = dataAccess.Query2<Balance>().Where(b => b.Date < today).Max();
+            var latestBalanceRecord = await dataAccess.GetClosestBalance(today);
             if (latestBalanceRecord == null)
             {
                 return new List<ForecastPosition> { };
@@ -35,7 +36,7 @@ namespace VilligerElectronics.BudgetPlanner.Core
                     Balance = currentBalance,
                     Change = budgetPosition.Ammount,
                     Description = budgetPosition.Description,
-                    Time = budgetPosition.DueDate
+                    Date = budgetPosition.DueDate
                 };
             }
 

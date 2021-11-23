@@ -1,0 +1,62 @@
+﻿@page "/situation"
+
+<PageTitle>Budget situation</PageTitle>
+
+@using BudgetPlanner.Blazor.Data
+@using BudgetPlanner.Domain.Entities
+@using System.Globalization
+@using VilligerElectronics.BudgetPlanner.Core
+@inject ForecastService ForecastService
+
+<h1>Budget forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+
+@if (budgets == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Change</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var budget in budgets)
+            {
+                <tr>
+                    <td>@budget.Date.ToShortDateString()</td>
+                    <td>@budget.Description</td>
+                    <td>@budget.Change</td>
+                    <td>@budget.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<ForecastPosition>? budgets;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Update();
+    }
+
+    private async Task Update()
+    {
+        budgets = await ForecastService.CreateForecast(DateOnly.FromDateTime(DateTime.Now));
+    }
+
+    protected async Task RemoveBudget(string id)
+    {
+        //BudgetService.RemoveById(id);
+        await Update();
+    }
+}

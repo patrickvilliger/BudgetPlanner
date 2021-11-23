@@ -4,7 +4,7 @@
     {
         public string Description { get; set; }
 
-        public DateOnly Time { get; set; }
+        public DateOnly Date { get; set; }
 
         public decimal Change { get; set; }
 

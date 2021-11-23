@@ -8,11 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<BudgetService>();
-builder.Services.AddSingleton<IDataAccess, DataAccess>();
 
 builder.Services.AddSingleton<DocumentStoreProvider>();
 builder.Services.AddSingleton<IDocumentStore>(r => r.GetRequiredService<DocumentStoreProvider>().Create());
+
+builder.Services.AddSingleton<IDataAccess, DataAccess>();
+
+builder.Services.AddSingleton<BudgetService>();
+builder.Services.AddSingleton<ForecastService>();
 
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
 
@@ -34,5 +37,7 @@ app.UseRouting();
 
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
+app.Services.GetRequiredService<IDocumentStore>();
 
 app.Run();

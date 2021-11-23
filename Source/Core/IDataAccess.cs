@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using BudgetPlanner.Domain.Entities;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,5 +19,7 @@ namespace VilligerElectronics.BudgetPlanner.Core
         void Store<T>(T document);
 
         void Remove<T>(string id);
+
+        Task<Balance?> GetClosestBalance(DateOnly today);
     }
 }

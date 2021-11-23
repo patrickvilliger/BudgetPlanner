@@ -1,12 +1,13 @@
-﻿@page "/fetchdata"
+﻿@page "/positions"
 
 <PageTitle>Budget forecast</PageTitle>
 
 @using BudgetPlanner.Blazor.Data
 @using BudgetPlanner.Domain.Entities
+@using System.Globalization
 @inject BudgetService BudgetService
 
-<h1>Budget forecast</h1>
+<h1>Budget Positions</h1>
 
 <p>This component demonstrates fetching data from a service.</p>
 
@@ -16,6 +17,14 @@
 }
 else
 {
+    <EditForm Model="@budgetPosition" OnValidSubmit="@HandleValidSubmit">
+        <InputText @bind-Value="budgetPosition.Description"/>
+        <InputDate @bind-Value="budgetPosition.DueDate"/>
+        <input type="number" value="@(budgetPosition.Ammount.ToString("G29"))" @onchange="@(e => budgetPosition.Ammount = decimal.Parse(e.Value.ToString(), NumberStyles.Any, CultureInfo.InvariantCulture))" />
+
+        <button class="btn btn-primary" type="submit">Add</button>
+    </EditForm>
+
     <table class="table">
         <thead>
             <tr>
@@ -49,12 +58,35 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        await Update();
+    }
+
+    private async Task Update()
+    {
         budgets = await BudgetService.GetAllBudgetPositions();
     }
 
     protected async Task RemoveBudget(string id)
     {
         BudgetService.RemoveById(id);
-        budgets = await BudgetService.GetAllBudgetPositions();
+        await Update();
+    }
+
+    private BudgetPosition budgetPosition = new BudgetPosition()
+    {
+            DueDate = DateOnly.FromDateTime(DateTime.Now),
+            Description = "",
+            BookingDate = DateOnly.MinValue,
+            Tags = new List<string>
+            {
+                "Income",
+                "NoTax"
+            }
+    };
+
+    private async Task HandleValidSubmit()
+    {
+        BudgetService.StoreBudgetPosition(budgetPosition);
+        await Update();
     }
 }
