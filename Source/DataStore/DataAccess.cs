@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
+using VilligerElectronics.BudgetPlanner.Core;
 
 namespace VilligerElectronics.BudgetPlanner.DataStore
 {
@@ -28,6 +28,14 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
             using (var session = _store.OpenAsyncSession())
             {
                 return await session.Query<T>().ToListAsync();
+            }
+        }
+
+        public IQueryable<T> Query2<T>()
+        {
+            using (var session = _store.OpenSession())
+            {
+                return session.Query<T>();
             }
         }
 

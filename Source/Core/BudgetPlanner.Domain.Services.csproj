@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AssemblyName>VilligerElectronics.BudgetPlanner.Core</AssemblyName>
+    <RootNamespace>VilligerElectronics.BudgetPlanner.Core</RootNamespace>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BudgetPlanner.Domain.Entities\BudgetPlanner.Domain.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

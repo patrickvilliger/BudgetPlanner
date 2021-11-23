@@ -3,7 +3,7 @@
 <PageTitle>Budget forecast</PageTitle>
 
 @using BudgetPlanner.Blazor.Data
-@using VilligerElectronics.BudgetPlanner.Core.Budget
+@using BudgetPlanner.Domain.Entities
 @inject BudgetService BudgetService
 
 <h1>Budget forecast</h1>
@@ -22,7 +22,7 @@ else
                 <th>Description</th>
                 <th>Due Date</th>
                 <th>Booked Date</th>
-                <th>Ammount</th>
+                <th>Amount</th>
                 <th>Tags</th>
             </tr>
         </thead>
@@ -34,7 +34,7 @@ else
                     <td>@budget.DueDate.ToShortDateString()</td>
                     <td>@budget.BookingDate.ToShortDateString()</td>
                     <td>@budget.Ammount</td>
-                    <td>@budget.Tags</td>
+                    <td>@string.Join(", ", budget.Tags)</td>
                     <td>
                         <button class="btn btn-danger" @onclick="() => RemoveBudget(budget.Id)">x</button>
                     </td>

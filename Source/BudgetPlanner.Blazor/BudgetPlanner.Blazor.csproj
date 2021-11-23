@@ -13,8 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj" />
-    <ProjectReference Include="..\DataStore\DataStore.csproj" />
+    <ProjectReference Include="..\Core\BudgetPlanner.Domain.Services.csproj" />
+    <ProjectReference Include="..\DataStore\BudgetPlanner.DataStore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using VilligerElectronics.BudgetPlanner.Core.Budget;
-using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
+﻿using BudgetPlanner.Domain.Entities;
+using VilligerElectronics.BudgetPlanner.Core;
 
 namespace BudgetPlanner.Blazor.Data
 {

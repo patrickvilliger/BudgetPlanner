@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{653C4E1C-8831-4EDB-8D25-D6F2D1A0A1A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlanner.Domain.Services", "Core\BudgetPlanner.Domain.Services.csproj", "{653C4E1C-8831-4EDB-8D25-D6F2D1A0A1A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "Core.Tests\Core.Tests.csproj", "{F86661D3-D157-4B00-94E0-21E925E72622}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStore", "DataStore\DataStore.csproj", "{A6E1F0C1-4416-4E1A-80BE-399F44361E45}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStore.Interfaces", "DataStore.Interfaces\DataStore.Interfaces.csproj", "{D0E8642B-C9B9-419D-AE96-B4D3668E1218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlanner.DataStore", "DataStore\BudgetPlanner.DataStore.csproj", "{A6E1F0C1-4416-4E1A-80BE-399F44361E45}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BudgetPlanner.Blazor", "BudgetPlanner.Blazor\BudgetPlanner.Blazor.csproj", "{236F3273-087B-4963-B11E-8C19A1868CA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BudgetPlanner.Domain.Entities", "BudgetPlanner.Domain.Entities\BudgetPlanner.Domain.Entities.csproj", "{57679945-6870-4F39-9975-FB154B865037}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,22 +21,18 @@ Global
 		{653C4E1C-8831-4EDB-8D25-D6F2D1A0A1A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{653C4E1C-8831-4EDB-8D25-D6F2D1A0A1A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{653C4E1C-8831-4EDB-8D25-D6F2D1A0A1A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F86661D3-D157-4B00-94E0-21E925E72622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F86661D3-D157-4B00-94E0-21E925E72622}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F86661D3-D157-4B00-94E0-21E925E72622}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F86661D3-D157-4B00-94E0-21E925E72622}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A6E1F0C1-4416-4E1A-80BE-399F44361E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A6E1F0C1-4416-4E1A-80BE-399F44361E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6E1F0C1-4416-4E1A-80BE-399F44361E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6E1F0C1-4416-4E1A-80BE-399F44361E45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0E8642B-C9B9-419D-AE96-B4D3668E1218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0E8642B-C9B9-419D-AE96-B4D3668E1218}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0E8642B-C9B9-419D-AE96-B4D3668E1218}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0E8642B-C9B9-419D-AE96-B4D3668E1218}.Release|Any CPU.Build.0 = Release|Any CPU
 		{236F3273-087B-4963-B11E-8C19A1868CA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{236F3273-087B-4963-B11E-8C19A1868CA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{236F3273-087B-4963-B11E-8C19A1868CA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{236F3273-087B-4963-B11E-8C19A1868CA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57679945-6870-4F39-9975-FB154B865037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57679945-6870-4F39-9975-FB154B865037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57679945-6870-4F39-9975-FB154B865037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57679945-6870-4F39-9975-FB154B865037}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

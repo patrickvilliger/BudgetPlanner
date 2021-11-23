@@ -1,7 +1,7 @@
 using BudgetPlanner.Blazor.Data;
 using Raven.Client.Documents;
+using VilligerElectronics.BudgetPlanner.Core;
 using VilligerElectronics.BudgetPlanner.DataStore;
-using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

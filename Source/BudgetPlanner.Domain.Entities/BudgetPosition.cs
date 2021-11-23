@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VilligerElectronics.BudgetPlanner.Core.Budget
+namespace BudgetPlanner.Domain.Entities
 {
     public record BudgetPosition
     {
