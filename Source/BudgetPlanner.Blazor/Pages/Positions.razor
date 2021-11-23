@@ -42,7 +42,7 @@ else
                     <td>@budget.Description</td>
                     <td>@budget.DueDate.ToShortDateString()</td>
                     <td>@budget.BookingDate.ToShortDateString()</td>
-                    <td>@budget.Ammount</td>
+                    <td>@budget.Ammount.ToCurrency()</td>
                     <td>@string.Join(", ", budget.Tags)</td>
                     <td>
                         <button class="btn btn-danger" @onclick="() => RemoveBudget(budget.Id)">x</button>

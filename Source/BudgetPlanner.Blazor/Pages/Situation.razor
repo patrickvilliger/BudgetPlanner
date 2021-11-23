@@ -32,8 +32,8 @@ else
                 <tr>
                     <td>@budget.Date.ToShortDateString()</td>
                     <td>@budget.Description</td>
-                    <td>@budget.Change</td>
-                    <td>@budget.Balance</td>
+                    <td>@budget.Change.ToCurrency()</td>
+                    <td>@budget.Balance.ToCurrency()</td>
                 </tr>
             }
         </tbody>

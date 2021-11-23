@@ -51,14 +51,16 @@ namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
 
         public async Task<Balance?> GetClosestBalance(DateOnly today)
         {
+            var refDate = today.ToDateTime(TimeOnly.MinValue);
+
             using (var session = _store.OpenAsyncSession())
             {
-                var resultList = await session.Query<Balance>()
-                              .Where(b => b.Date < today)
+                var resultList = await session.Query<BalanceDb>()
+                              .Where(b => b.Date < refDate)
                               .OrderByDescending(x => x.Date)
                               .ToListAsync();
 
-                return resultList.FirstOrDefault();
+                return resultList.FirstOrDefault()?.Map();
             }
         }
     }

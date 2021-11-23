@@ -1,4 +1,5 @@
 ﻿using BudgetPlanner.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,5 +12,7 @@ namespace VilligerElectronics.BudgetPlanner.Core
         void Store(BudgetPosition document);
 
         void Remove(string id);
+
+        Task<List<BudgetPosition>> GetBudgetAfter(DateOnly today);
     }
 }

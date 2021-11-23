@@ -25,9 +25,7 @@ namespace VilligerElectronics.BudgetPlanner.Core
                 return new List<ForecastPosition> { };
             }
 
-            throw new NotImplementedException();
-
-            /*var budgetPositions = dataAccess.Query2<BudgetPosition>().Where(b => b.DueDate > latestBalanceRecord.Date).OrderBy(x => x.DueDate).ToList();
+            var budgetPositions = await budgetRepo.GetBudgetAfter(latestBalanceRecord.Date);
             
             var forecast = new List<ForecastPosition>();
             var currentBalance = latestBalanceRecord.CurrentBalance;
@@ -42,10 +40,11 @@ namespace VilligerElectronics.BudgetPlanner.Core
                     Description = budgetPosition.Description,
                     Date = budgetPosition.DueDate
                 };
+
+                forecast.Add(forecastPos);
             }
 
             return forecast;
-            */
         }
     }
 }

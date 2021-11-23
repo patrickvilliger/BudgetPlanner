@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VilligerElectronics.BudgetPlanner.Core;
-using VilligerElectronics.BudgetPlanner.DataStore.BalancePositions;
-using VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions;
 
 namespace VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions
 {
@@ -48,6 +46,23 @@ namespace VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions
             {
                 session.Delete(id);
                 session.SaveChanges();
+            }
+        }
+
+        public async Task<List<BudgetPosition>> GetBudgetAfter(DateOnly today)
+        {
+            var refDate = today.ToDateTime(TimeOnly.MinValue);
+            using (var session = _store.OpenAsyncSession())
+            {
+                var result = await session
+                    .Query<BudgetDb>()
+                    .Where(b => b.DueDate > refDate)
+                    .OrderBy(x => x.DueDate)
+                    .ToListAsync();
+
+                return result
+                    .Select(x => x.Map())
+                    .ToList();
             }
         }
     }

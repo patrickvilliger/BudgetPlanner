@@ -35,7 +35,7 @@ else
             {
                 <tr>
                     <td>@balance.Date</td>
-                    <td>@balance.CurrentBalance</td>
+                    <td>@balance.CurrentBalance.ToCurrency()</td>
                     <td>
                         <button class="btn btn-danger" @onclick="() => RemoveBudget(balance.Id)">x</button>
                     </td>
