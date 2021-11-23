@@ -2,10 +2,10 @@
 
 <PageTitle>Budget positions</PageTitle>
 
-@using BudgetPlanner.Blazor.Data
 @using BudgetPlanner.Domain.Entities
 @using System.Globalization
-@inject BudgetService BudgetService
+@using VilligerElectronics.BudgetPlanner.Core
+@inject IBudgetRepository BudgetRepo
 
 <h1>Budget Positions</h1>
 
@@ -63,12 +63,12 @@ else
 
     private async Task Update()
     {
-        budgets = await BudgetService.GetAllBudgetPositions();
+        budgets = await BudgetRepo.QueryAsync();
     }
 
     protected async Task RemoveBudget(string id)
     {
-        BudgetService.RemoveById(id);
+        BudgetRepo.Remove(id);
         await Update();
     }
 
@@ -86,7 +86,7 @@ else
 
     private async Task HandleValidSubmit()
     {
-        BudgetService.StoreBudgetPosition(budgetPosition);
+        BudgetRepo.Store(budgetPosition);
         await Update();
     }
 }

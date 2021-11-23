@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VilligerElectronics.BudgetPlanner.DataStore.DbModels
+namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
 {
     internal class BalanceDb
     {

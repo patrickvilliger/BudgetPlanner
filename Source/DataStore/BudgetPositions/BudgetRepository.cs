@@ -5,24 +5,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VilligerElectronics.BudgetPlanner.Core;
+using VilligerElectronics.BudgetPlanner.DataStore.BalancePositions;
+using VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions;
 
-namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
+namespace VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions
 {
-    public class BalanceRepository : IBalanceRepository
+    public class BudgetRepository : IBudgetRepository
     {
         private IDocumentStore _store;
 
-        public BalanceRepository(IDocumentStore store)
+        public BudgetRepository(IDocumentStore store)
         {
             _store = store;
         }
 
-        public async Task<List<Balance>> QueryAsync()
+        public async Task<List<BudgetPosition>> QueryAsync()
         {
             using (var session = _store.OpenAsyncSession())
             {
                 var result = await session
-                    .Query<BalanceDb>()
+                    .Query<BudgetDb>()
                     .ToListAsync();
 
                 return result
@@ -31,7 +33,7 @@ namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
             }
         }
 
-        public void Store(Balance document)
+        public void Store(BudgetPosition document)
         {
             using (var session = _store.OpenSession())
             {
@@ -46,19 +48,6 @@ namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
             {
                 session.Delete(id);
                 session.SaveChanges();
-            }
-        }
-
-        public async Task<Balance?> GetClosestBalance(DateOnly today)
-        {
-            using (var session = _store.OpenAsyncSession())
-            {
-                var resultList = await session.Query<Balance>()
-                              .Where(b => b.Date < today)
-                              .OrderByDescending(x => x.Date)
-                              .ToListAsync();
-
-                return resultList.FirstOrDefault();
             }
         }
     }

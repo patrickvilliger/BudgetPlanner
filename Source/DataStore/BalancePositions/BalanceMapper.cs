@@ -1,6 +1,5 @@
 ﻿using BudgetPlanner.Domain.Entities;
 using System;
-using VilligerElectronics.BudgetPlanner.DataStore.DbModels;
 
 namespace VilligerElectronics.BudgetPlanner.DataStore.BalancePositions
 {

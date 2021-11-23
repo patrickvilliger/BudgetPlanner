@@ -1,8 +1,8 @@
-using BudgetPlanner.Blazor.Data;
 using Raven.Client.Documents;
 using VilligerElectronics.BudgetPlanner.Core;
 using VilligerElectronics.BudgetPlanner.DataStore;
 using VilligerElectronics.BudgetPlanner.DataStore.BalancePositions;
+using VilligerElectronics.BudgetPlanner.DataStore.BudgetPositions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,10 +13,9 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<DocumentStoreProvider>();
 builder.Services.AddSingleton<IDocumentStore>(r => r.GetRequiredService<DocumentStoreProvider>().Create());
 
-builder.Services.AddSingleton<IDataAccess, DataAccess>();
 builder.Services.AddSingleton<IBalanceRepository, BalanceRepository>();
+builder.Services.AddSingleton<IBudgetRepository, BudgetRepository>();
 
-builder.Services.AddSingleton<BudgetService>();
 builder.Services.AddSingleton<ForecastService>();
 
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));

@@ -8,12 +8,12 @@ namespace VilligerElectronics.BudgetPlanner.Core
 {
     public class ForecastService
     {
-        private readonly IDataAccess dataAccess;
+        private readonly IBudgetRepository budgetRepo;
         private readonly IBalanceRepository balanceRepo;
 
-        public ForecastService(IDataAccess dataAccess, IBalanceRepository balanceRepo)
+        public ForecastService(IBudgetRepository budgetRepo, IBalanceRepository balanceRepo)
         {
-            this.dataAccess = dataAccess;
+            this.budgetRepo = budgetRepo;
             this.balanceRepo = balanceRepo;
         }
 
