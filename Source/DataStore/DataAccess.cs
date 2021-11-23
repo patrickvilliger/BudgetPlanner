@@ -1,14 +1,13 @@
-﻿using DataStore.Interfaces;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using NLog;
 using Raven.Client.Documents;
 using Raven.Embedded;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using VilligerElectronics.BudgetPlanner.DataStore;
+using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
-namespace DataStore
+namespace VilligerElectronics.BudgetPlanner.DataStore
 {
     public class DataAccess : IDataAccess
     {
@@ -36,7 +35,7 @@ namespace DataStore
             {
                 _store = EmbeddedServer.Instance.GetDocumentStore("BudgetPlanner");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Error(e);
             }

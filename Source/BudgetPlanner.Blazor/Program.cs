@@ -1,8 +1,8 @@
 using BudgetPlanner.Blazor.Data;
-using DataStore;
-using DataStore.Interfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using VilligerElectronics.BudgetPlanner.DataStore;
+using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

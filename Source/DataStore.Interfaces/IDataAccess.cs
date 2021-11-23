@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataStore.Interfaces
+namespace VilligerElectronics.BudgetPlanner.DataStore.Interfaces
 {
     public interface IDataAccess
     {
