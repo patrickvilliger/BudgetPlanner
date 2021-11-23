@@ -1,4 +1,5 @@
 using BudgetPlanner.Blazor.Data;
+using Raven.Client.Documents;
 using VilligerElectronics.BudgetPlanner.DataStore;
 using VilligerElectronics.BudgetPlanner.DataStore.Interfaces;
 
@@ -9,6 +10,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<BudgetService>();
 builder.Services.AddSingleton<IDataAccess, DataAccess>();
+
+builder.Services.AddSingleton<DocumentStoreProvider>();
+builder.Services.AddSingleton<IDocumentStore>(r => r.GetRequiredService<DocumentStoreProvider>().Create());
 
 builder.Services.Configure<DbSettings>(builder.Configuration.GetSection("DbSettings"));
 

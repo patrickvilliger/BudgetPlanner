@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using NLog;
-using Raven.Client.Documents;
-using Raven.Embedded;
-using System;
+﻿using Raven.Client.Documents;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,37 +8,12 @@ namespace VilligerElectronics.BudgetPlanner.DataStore
 {
     public class DataAccess : IDataAccess
     {
-        private static Logger Log = LogManager.GetCurrentClassLogger();
-        private IDocumentStore _store;
-
-        public DataAccess(IOptions<DbSettings> settingsAccessor)
+        public DataAccess(IDocumentStore store)
         {
-            var serverOptions = new ServerOptions()
-            {
-                ServerUrl = settingsAccessor.Value.ServerUrl,
-                DataDirectory = settingsAccessor.Value.DataDirectory,
-                FrameworkVersion = "6.0.0"
-            };
+            _store = store;
+        }   
 
-            try
-            {
-                EmbeddedServer.Instance.StartServer(serverOptions);
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-
-            try
-            {
-                _store = EmbeddedServer.Instance.GetDocumentStore("BudgetPlanner");
-            }
-            catch (Exception e)
-            {
-                Log.Error(e);
-            }
-
-        }
+        private IDocumentStore _store;
 
         public List<T> Query<T>()
         {
